@@ -1,8 +1,17 @@
 package nl.novi.hello.model;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "books")
 public class Book {
 
     // attributen
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
     private String title;
     private String author;
     private String isbn;
@@ -10,6 +19,14 @@ public class Book {
     // constructor is niet nodig
 
     // setters and getters
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
