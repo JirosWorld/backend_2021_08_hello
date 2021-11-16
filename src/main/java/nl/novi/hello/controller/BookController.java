@@ -17,22 +17,19 @@ import java.util.Optional;
 @RestController
 public class BookController {
 
-    // attribute
-    private List<Book> books = new ArrayList<>();
-
     // constructor
     public BookController() {
         Book boek1 = new Book();
         boek1.setTitle("Harry Potter");
         boek1.setAuthor("Rowling");
         boek1.setIsbn("279827337792834982");
-        books.add(boek1);
+        bookRepository.save(boek1);
 
         Book boek2 = new Book();
         boek2.setTitle("Harry Potter, deel 2");
         boek2.setAuthor("Rowling");
         boek2.setIsbn("279827337792111111");
-        books.add(boek2);
+        bookRepository.save(boek2);
     }
 
     @Autowired
