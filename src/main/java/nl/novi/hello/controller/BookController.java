@@ -12,6 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class BookController {
@@ -66,13 +67,8 @@ public class BookController {
 
     @PutMapping(value = "/books/{id}")
     public ResponseEntity<Object> updateBook(@PathVariable int id, @RequestBody Book book) {
-        books.set(id, book);
-        return ResponseEntity.noContent().build();
-    }
+        Book existingBook = bookRepository.findById(id).orElse(null);
 
-    @PatchMapping(value = "/books/{id}")
-    public ResponseEntity<Object> partialUpdateBook(@PathVariable int id, @RequestBody Book book) {
-        Book existingBook = books.get(id);
         if (!book.getTitle().isEmpty()) {
             existingBook.setTitle(book.getTitle());
         }
@@ -82,7 +78,26 @@ public class BookController {
         if (!book.getIsbn().isEmpty()) {
             existingBook.setIsbn(book.getIsbn());
         }
-        books.set(id, existingBook);
+        bookRepository.save(existingBook);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping(value = "/books/{id}")
+    public ResponseEntity<Object> partialUpdateBook(@PathVariable int id, @RequestBody Book book) {
+        Book existingBook = bookRepository.findById(id).orElse(null);
+
+        if (!book.getTitle().isEmpty()) {
+            existingBook.setTitle(book.getTitle());
+        }
+        if (!book.getAuthor().isEmpty()) {
+            existingBook.setAuthor(book.getAuthor());
+        }
+        if (!book.getIsbn().isEmpty()) {
+            existingBook.setIsbn(book.getIsbn());
+        }
+        bookRepository.save(existingBook);
+
         return ResponseEntity.noContent().build();
     }
 
