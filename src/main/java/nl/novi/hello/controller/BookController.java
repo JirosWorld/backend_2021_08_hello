@@ -49,7 +49,7 @@ public class BookController {
 
     @DeleteMapping(value = "/books/{id}")
     public ResponseEntity<Object> deleteBook(@PathVariable("id") int id) {
-        books.remove(id);
+        bookRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
 
