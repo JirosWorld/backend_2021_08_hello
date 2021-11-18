@@ -1,10 +1,13 @@
 package nl.novi.hello.service;
 
+import nl.novi.hello.exception.RecordNotFoundException;
 import nl.novi.hello.model.Book;
 import nl.novi.hello.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class BookService {
@@ -17,7 +20,16 @@ public class BookService {
     }
 
     public Book getBook(int id) {
-        return bookRepository.findById(id).orElse(null);
+        Optional<Book> optionalBook = bookRepository.findById(id);
+
+        if (optionalBook.isPresent()) {
+            return optionalBook.get();
+        }
+        else {
+            // exception
+            throw new RecordNotFoundException("ID does not exist!!!");
+        }
+
     }
 
     public void deleteBook(int id) {
