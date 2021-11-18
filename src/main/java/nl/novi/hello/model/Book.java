@@ -16,7 +16,24 @@ public class Book {
     private String author;
     private String isbn;
 
-    // constructor is niet nodig
+    // voor Spring Boot (JPA) is een constructor niet nodig
+
+    // default constructor
+    public Book() {}
+
+    public Book(String title, String author, String isbn) {
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+    }
+
+    // full constructor
+    public Book(int id, String title, String author, String isbn) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.isbn = isbn;
+    }
 
     // setters and getters
 
