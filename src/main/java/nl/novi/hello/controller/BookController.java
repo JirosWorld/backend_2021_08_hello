@@ -1,5 +1,6 @@
 package nl.novi.hello.controller;
 
+import nl.novi.hello.dto.BookRequestDto;
 import nl.novi.hello.model.Book;
 
 import nl.novi.hello.service.BookService;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,8 +39,8 @@ public class BookController {
     }
 
     @PostMapping(value = "/books")
-    public ResponseEntity<Object> addBook(@RequestBody Book book) {
-        int newId = bookService.addBook(book);
+    public ResponseEntity<Object> addBook(@Valid @RequestBody BookRequestDto bookRequestDto) {
+        int newId = bookService.addBook(bookRequestDto);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(newId).toUri();
