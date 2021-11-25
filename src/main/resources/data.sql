@@ -7,3 +7,14 @@ VALUES
 ('Harry Potter en de Orde van de Feniks', 'J.K. Rowling', '906169700X'),
 ('Harry Potter en de Halfbloed Prins', 'J.K. Rowling', '9061697662'),
 ('Harry Potter en de Relieken van de Dood', 'J.K. Rowling', '9789061698326');
+
+INSERT INTO persons (name)
+VALUES
+('Hans'),
+('Johan'),
+('Tanja');
+
+INSERT INTO persons_books (person_id, books_id)
+VALUES
+(1, 1),
+(2, 2);

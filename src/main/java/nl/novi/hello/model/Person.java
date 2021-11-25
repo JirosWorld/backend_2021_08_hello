@@ -1,6 +1,8 @@
 package nl.novi.hello.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "persons")
@@ -13,6 +15,9 @@ public class Person {
     private int id;
 
     private String name;
+
+    @OneToMany
+    private List<Book> books = new ArrayList<>();
 
     // getters and setters
 
@@ -32,4 +37,11 @@ public class Person {
         this.name = name;
     }
 
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+    }
 }
