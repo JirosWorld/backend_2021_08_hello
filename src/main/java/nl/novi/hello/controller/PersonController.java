@@ -1,5 +1,6 @@
 package nl.novi.hello.controller;
 
+import nl.novi.hello.model.Book;
 import nl.novi.hello.model.Person;
 import nl.novi.hello.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,15 @@ public class PersonController {
 
         return ResponseEntity.created(location).build();
     }
-    
+
+    @GetMapping(value = "/persons/{id}/books")
+    public ResponseEntity<Object> getPersonBooks(@PathVariable int id) {
+        return ResponseEntity.ok(personService.getPersonBooks(id));
+    }
+
+    @PostMapping(value = "/persons/{id}/books")
+    public ResponseEntity<Object> addPersonBook(@PathVariable int id, @RequestBody Book book) {
+        personService.addPersonBook(id, book);
+        return ResponseEntity.created(null).build();
+    }
 }

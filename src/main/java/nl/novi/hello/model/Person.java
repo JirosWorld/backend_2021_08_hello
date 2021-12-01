@@ -16,7 +16,7 @@ public class Person {
 
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "owner", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Book> books = new ArrayList<>();
 
     // getters and setters
