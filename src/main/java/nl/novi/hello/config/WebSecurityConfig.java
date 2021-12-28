@@ -73,6 +73,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "goodbye").permitAll()
                 .anyRequest().permitAll()
                 .and()
+                .cors()
+                .and()
                 .csrf().disable()
                 .formLogin().disable()
                 .sessionManagement()
