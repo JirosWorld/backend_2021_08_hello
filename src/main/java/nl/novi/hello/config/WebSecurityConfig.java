@@ -26,21 +26,17 @@ import static org.springframework.http.HttpMethod.PATCH;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Autowired
     private DataSource dataSource;
-    private JwtRequestFilter jwtRequestFilter;
 
     @Autowired
-    WebSecurityConfig(DataSource dataSource, JwtRequestFilter jwtRequestFilter) {
-        this.dataSource = dataSource;
-        this.jwtRequestFilter = jwtRequestFilter;
-    }
+    private JwtRequestFilter jwtRequestFilter;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    // Authentication
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 
@@ -66,7 +62,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http
-                //HTTP Basic authentication
                 .httpBasic()
                 .and()
                 .authorizeRequests()
